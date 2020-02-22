@@ -6,6 +6,8 @@ path = os.path.join(my_path, "../Drivers/x32/chromedriver.exe")
 driver = webdriver.Chrome(path)
 driver.get("https://www.google.com/")
 screenPath = os.path.join(my_path, "../ScreenPrint/")
+timestr=time.strftime("%Y%m%d=%H%M%S")
+driver.maximize_window()
 # css
 # searchBox = driver.find_element_by_css_selector("input[title='Search']")
 # scB = driver.find_element_by_name("input[name='q']")
@@ -16,7 +18,7 @@ searchB = driver.find_element_by_xpath("//input[@role='combobox']")
 searchB.send_keys("Selenium easy")
 time.sleep(3)
 
-driver.save_screenshot(screenPath + "GooglePage.png")
+driver.save_screenshot(screenPath + "GooglePage_"+timestr+".png")
 driver.find_element_by_id("lga")
 # write what you want to search inside the parentheses
 magnifyingGlass = driver.find_element_by_css_selector("input[type='submit']")
