@@ -1,9 +1,22 @@
-import os
+import os, time
 import xlrd
 from selenium import webdriver
 
-my_path=os.path.abspath(os.path.dirname(__file__))
+my_path = os.path.abspath(os.path.dirname(__file__))
 driverpath = os.path.join(my_path, "../Drivers/x32/chromedriver.exe")
-path =os.path.join(my_path,"../TestData/TestData.xls")
+path = os.path.join(my_path, "../TestData/TestData.xls")
 driver = webdriver.Chrome(driverpath)
 driver.maximize_window()
+
+time.sleep(3)
+driver.get("https://facebook.com")
+time.sleep(3)
+email = driver.find_element_by_id("email")
+password = driver.find_element_by_id("pass")
+loginBtn = driver.find_element_by_css_selector("input[type='submit']")
+
+book = xlrd.open_workbook(path)
+
+ws = book.sheet_by_index(0)
+username = ws.cell_value(1, 0)
+pwd = ws.cell_value(1, 1)
