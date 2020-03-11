@@ -6,8 +6,8 @@ driver.get("https://www.facebook.com/")
 driver.maximize_window()
 
 # driver.find_element_by_css_selector("input[data-testid='royal_email']")
-email = driver.find_elements_by_id("email")
-password = driver.find_elements_by_id("pass")
+email = driver.find_element_by_id("email")
+password = driver.find_element_by_id("pass")
 
 loginBtn = driver.find_element_by_css_selector("input[type='submit']")
 
