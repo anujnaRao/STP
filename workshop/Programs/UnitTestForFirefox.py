@@ -17,8 +17,8 @@ class FirefoxLaunch(unittest.TestCase):
 
     def test_firefox_fn(self):
         self.driver.get("http://www.google.com")
-        textBox = self.driver.find_element_by_name('q')
-        textBox.send_keys("Hello Moto")
+        textbox = self.driver.find_element_by_name('q')
+        textbox.send_keys("Hello Moto")
         time.sleep(5)
 
     def tearDown(self):
