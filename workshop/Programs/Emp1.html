@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../robot.png">
+    <link rel="stylesheet" href="../assets/bootstrap.css">
+    <link rel="stylesheet" href="../assets/bootstrap.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/jquery-3.4.0.slim.min.js"></script>
+    <script src="../assets/bootstrap.js"></script>
+    <script src="../assets/popper.min.js"></script>
+    <script src="../assets/tooltip.min.js"></script>
+    <title>Widgets | Count</title>
+    <script>
+    function copy() {
+        hidden_element = document.getElementById('hiddden_element');
+        hiddden_element.setAttribute('value', 'Active')
+    }
+</script>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top container-fluid">
+    <div class="container">
+        <a class="navbar-brand logo" href="../index.html">
+            <img src="../robot.png" class="img-fluid " alt="" style="max-width:10% !important; height:auto !important;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto text-center text-justify">
+                <li class="nav-item ">
+                    <a class="nav-link" href="./index.html">Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./tutorial.html">Tutorial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./countWidgets.html">Widgets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./studentMarks.html">Excel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./seleniumTest/Emp1.html">Program 10A</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./seleniumTest/Emp2.html">Program 10B</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+
+<center>
+    <table cellspacing="2px" cellpadding="2">
+        <tr>
+            <th>Enter Employee Name:</th>
+            <th>Employee ID:</th>
+            <th>Employee Join_Date:</th>
+            <th>years of exp</th>
+        </tr>
+        <tr>
+            <td><input type=text value="" class="name"></td>
+            <td><input type=text value="" class="emp_id"></td>
+            <td><input type=text value="" class="join_date"></td>
+            <td><input type=text value="" class="years_of_exp"></td>
+
+        </tr>
+        <tr>
+            <td><input type=text value="" class='name'></td>
+            <td><input type=text value="" class='emp_id'></td>
+            <td><input type=text value="" class="join_date"></td>
+            <td><input type=text value="" class="years_of_exp"></td>
+        </tr>
+        <tr>
+            <td><input type=text value="" class='name'></td>
+            <td><input type=text value="" class='emp_id'></td>
+            <td><input type=text value="" class="join_date"></td>
+            <td><input type=text value="" class="years_of_exp"></td>
+        </tr>
+        <tr>
+            <td><input type=text value="" class='name'></td>
+            <td><input type=text value="" class='emp_id'></td>
+            <td><input type=text value="" class="join_date"></td>
+            <td><input type=text value="" class="years_of_exp"></td>
+        </tr>
+        <tr>
+    </table>
+</center>
+<center><input type="button" id="copy" value="copy" onclick="copy()" style="height:50;width:100;">
+    <input type="hidden" id="hiddden_element" value="">
+</center>
+</body>
+</html>
