@@ -1,6 +1,7 @@
+import xlrd
 import xlwt
 import os, time
-#from xlutils
+from xlutils import *
 from selenium import webdriver
 
 my_path = os.path.abspath(os.path.dirname(__file__))
@@ -25,13 +26,13 @@ value = nextSearch.text
 # print(value)
 
 #To write
-'''
+
 wb = xlwt.Workbook()
 ws = wb.add_sheet(("Sheet1"))
 ws.write(0, 0, value)
 wb.save(path)
 nextSearch.click()
-'''
+
 
 wb=copy(xlrd.open_workbook(path))
 wb.get_sheet(0).write(3,3,value)

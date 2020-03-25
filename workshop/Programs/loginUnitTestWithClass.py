@@ -1,4 +1,4 @@
-import os
+
 import time
 import unittest
 from selenium import webdriver
@@ -27,7 +27,7 @@ class Login(unittest.TestCase):
         timeer = time.strftime("%Y%m%d = %H%M%S")
         picture = "webImages"
         # taking screenshots
-        self.driver.save_screenshot("../screenShots/" + picture + timeer + ".png")
+        self.driver.save_screenshot("../ScreenPrint/" + picture + timeer + ".png")
         time.sleep(5)
 
     def test_chrome_fn1(self):
@@ -46,7 +46,7 @@ class Login(unittest.TestCase):
         timeer = time.strftime("%Y%m%d = %H%M%S")
         picture = "webImages"
         # taking screenshots
-        self.driver.save_screenshot("../screenShots/" + picture + timeer + ".png")
+        self.driver.save_screenshot("../ScreenPrint/" + picture + timeer + ".png")
         time.sleep(5)
 
     def test_chrome_fn2(self):
@@ -65,7 +65,7 @@ class Login(unittest.TestCase):
         timeer = time.strftime("%Y%m%d = %H%M%S")
         picture = "webImages"
         # taking screenshots
-        self.driver.save_screenshot("../screenShots/" + picture + timeer + ".png")
+        self.driver.save_screenshot("../ScreenPrint/" + picture + timeer + ".png")
         time.sleep(5)
 
     def test_chrome_fn3(self):
@@ -84,7 +84,7 @@ class Login(unittest.TestCase):
         timeer = time.strftime("%Y%m%d = %H%M%S")
         picture = "webImages"
         # taking screenshots
-        self.driver.save_screenshot("../screenShots/" + picture + timeer + ".png")
+        self.driver.save_screenshot("../ScreenPrint/" + picture + timeer + ".png")
         time.sleep(5)
 
     def tearDown(self):

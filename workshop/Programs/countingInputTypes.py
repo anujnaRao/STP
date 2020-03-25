@@ -34,6 +34,9 @@ class countWidget(unittest.TestCase):
         print("\nradio button count = ", count)
         print("----------------------------------------------------------")
         time.sleep(5)
+        timer = time.strftime("%Y%m%d = %H%M%S")
+        picture = "webImages"
+        self.driver.save_screenshot("../ScreenPrint/" + picture + timer + ".png")
 
     def test_count2(self):
         self.driver.get("https://gnsaddy.github.io/webAutomationSelenium/countWidgets.html")
@@ -46,6 +49,9 @@ class countWidget(unittest.TestCase):
         print("\ntext box count = ", count)
         print("----------------------------------------------------------")
         time.sleep(5)
+        timer = time.strftime("%Y%m%d = %H%M%S")
+        picture = "webImages"
+        self.driver.save_screenshot("../ScreenPrint/" + picture + timer + ".png")
 
     def test_count3(self):
         self.driver.get("https://gnsaddy.github.io/webAutomationSelenium/countWidgets.html")
@@ -68,6 +74,10 @@ class countWidget(unittest.TestCase):
             print(element.get_attribute("value"))
         print("\ncombobox value count =  ", len(val))
         time.sleep(5)
+        timer = time.strftime("%Y%m%d = %H%M%S")
+        picture = "webImages"
+        self.driver.save_screenshot("../ScreenPrint/" + picture + timer + ".png")
+
 
     def tearDown(self):
         self.driver.quit()
