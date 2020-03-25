@@ -14,8 +14,21 @@ class Table_Test(unittest.TestCase):
         self.driver.get("https://www.seleniumeasy.com/test/table-search-filter-demo.html")
         search = self.driver.find_element_by_xpath('//*[@id="task-table-filter"]')
         search.send_keys("Software")
-        time.sleep(5)
-        # result = self.driver.find_element_by_class_name("filterTable_no_results")
+        time.sleep(2)
+        filterButton = self.driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[2]/div/div/div/button')
+        filterButton.click()
+        search2 = self.driver.find_element_by_xpath(
+            '/html/body/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[1]/input')
+        search2.send_keys("6")
+        search3 = self.driver.find_element_by_xpath(
+            '/html/body/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[2]/input')
+        search3.send_keys("UsernameName")
+        search4 = self.driver.find_element_by_xpath(
+            '/html/body/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[3]/input')
+        search4.send_keys("First name")
+        search5 = self.driver.find_element_by_xpath(
+            '/html/body/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[4]/input')
+        search5.send_keys("Last Name")
         print("Result not Found")
         timer = time.strftime("%Y%m%d = %H%M%S")
         picture = "webImages"
