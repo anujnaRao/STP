@@ -1,15 +1,19 @@
 import time
 from collections import OrderedDict
-
-import xlrd
 from selenium import webdriver
 from xlutils.copy import copy
+import xlrd
 
-excel_file_name = "marks.xls"
-student_marks_html_page = "https://gnsaddy.github.io/webAutomationSelenium/seleniumTest/student.html"
+excel_file_name = "../LabProgramsMaterials/marks.xls"
+student_marks_html_page = "file:///G:/workspace/MCA/4th_SEMESTER/STP/workshop/LabProgramsMaterials/student.html"
 
 
 def read_from_excel(path):
+    """
+   Reads excel sheet from specified path
+   :param path: Path of excel sheet with name.
+   :return: Dictionary of marks with name as the key value.
+   """
     book = xlrd.open_workbook(path)
     first_sheet = book.sheet_by_index(0)  # read the first sheet
     marks_dictionary = OrderedDict()
@@ -35,6 +39,8 @@ def calculate_result(driver, marks_dictionary):
 
 
 def get_total_percentage_result(driver):
+    """calculated total, percentage and result are filled into the (html) front end table in specified row and column
+     (fetched using web locators) """
     time.sleep(5)
     total_objects = driver.find_elements_by_class_name("total")
     percentage_objects = driver.find_elements_by_class_name("percentage")
@@ -48,19 +54,19 @@ def get_total_percentage_result(driver):
         percent.append(str(each_percentage_obj.get_attribute('value')))
     for each_result_obj in result_objects:
         result.append(str(each_result_obj.get_attribute('value')))
-    print("total:" + str(total))
+    print("Total:" + str(total))
     print("Percentage:" + str(percent))
     print("Result:" + str(result))
     return total, percent, result
 
 
 def append_to_excel(calculated_results):
-    """
-    Appends total, percentage, result to excel sheet.
-    """
+    """ The calculated result is also appended into the xml file(input file)
+Appends total, percentage, result to excel sheet.
+   """
     number_of_subjects = 5
     total, percent, result = calculated_results
-    rb = xlrd.open_workbook("results.xls")
+    rb = xlrd.open_workbook("../LabProgramsMaterials/results.xls")
     r_sheet = rb.sheet_by_index(0)
     c = r_sheet.ncols  # number of columns
     wb = copy(rb)
@@ -74,7 +80,7 @@ def append_to_excel(calculated_results):
     sheet.write(0, c + 2, "Result")  # Add the column 'Result' at the end in excel sheet
     for each_result_value, index in zip(result, range(1, number_of_subjects + 1)):
         sheet.write(index, c + 2, each_result_value)
-    wb.save("results.xls")
+    wb.save("../LabProgramsMaterials/results.xls")
     print('Saved excel sheet successfully.')
 
 
@@ -88,16 +94,12 @@ if __name__ == '__main__':
     print(marks_dictionary)
 
 driver = webdriver.Chrome("../Drivers/x32/chromedriver.exe")
-# driver.maximize_window()
-
+driver.maximize_window()
 path = student_marks_html_page
-driver.get(path)  # load web page
+driver.get(path)  # load web page.
 time.sleep(4)
-
 calculate_result(driver, marks_dictionary)
-
 calculation_results = get_total_percentage_result(driver)
-
 append_to_excel(calculation_results)
 print("Closing the browser")
 driver.quit()

@@ -1,41 +1,40 @@
+from selenium import webdriver
 import time
 
-from selenium import webdriver
-
-employee_source_file = "https://gnsaddy.github.io/webAutomationSelenium/seleniumTest/Emp1.html"
-employee_destin_file = "https://gnsaddy.github.io/webAutomationSelenium/seleniumTest/Emp2.html"
+employee_source_file = "file:///G:/workspace/MCA/4th_SEMESTER/STP/workshop/Lab%20Programs%20Materials/Emp1.html"
+employee_dest_file = "file:///G:/workspace/MCA/4th_SEMESTER/STP/workshop/Lab%20Programs%20Materials/Emp2.html"
 
 
 def wait_for_user_input(driver):
-    print("waiting for user inputs in web page..")
+    print("Waiting for the user inputs...")
     while (True):
-        element_value = str(driver.find_element_by_id('hiddden_element').get_attribute('value'))
+        element_value = str(driver.find_element_by_id('hidden_element1').get_attribute('value'))
         if element_value != '':
             print("User inputs are ready to be copied to one more web page.")
             return
         else:
             time.sleep(1)
 
-
-list = []
+#empty list
+lt = []
 
 
 def is_valid_data(class_name, value):
     if class_name == 'name':
-        # for name, value always should be alphabets, it may contain space.
+        # name, value should be alphabets, it may contain space.
         if value.replace(' ', '').isalpha():
             return True
         else:
             return False
     elif class_name == 'emp_id':
-        # this should be always digit.
-        if (value.isdigit()) and (value not in list):
-            list.append(value)
+        # this should always be digit.
+        if (value.isdigit()) and (value not in lt):
+            lt.append(value)
             return True
         else:
             return False
     elif class_name == 'join_date':
-        # this should be always in format dd-mm-yyyy, 10-06-2000, and it should be greater or equal to current date.
+        # Acceptable format for date is dd-mm-yyyy, 18-07-2007, it should be less than or equal to current date.
         try:
             from datetime import datetime
             datetime.strptime(value, '%d-%m-%Y')
@@ -49,7 +48,7 @@ def is_valid_data(class_name, value):
             print("Date should be entered in dd-mm-yyyy format")
             return False
     elif class_name == 'years_of_exp':
-        # It can be float or int value.
+        # It can be float or int value
         try:
             float(value)
             return True
@@ -59,22 +58,21 @@ def is_valid_data(class_name, value):
 
 if __name__ == "__main__":
     is_valid_data('name', 'hi')
-    # open chrome driver
     print("Opening chrome driver")
-    driver = webdriver.Chrome("../Drivers/x32/chromedriver.exe")
-    driver.maximize_window()
-    driver.get(employee_source_file)  # load web page.
-    print("Chrome driver opend.")
-    wait_for_user_input(driver)
+    driver_source = webdriver.Chrome("../drivers/x32/chromedriver.exe")
+    driver_source.maximize_window()
+    driver_source.get(employee_source_file)
+    print("Chrome driver opened")
+    wait_for_user_input(driver_source)
     # open 2nd chrome driver to open one more website
-    driver_destin = webdriver.Chrome("../Drivers/x32/chromedriver.exe")
-    driver_destin.maximize_window()
-    driver_destin.get(employee_destin_file)  # load web page.
+    driver_dest = webdriver.Chrome("../Drivers/x32/chromedriver.exe")
+    driver_dest.maximize_window()
+    driver_dest.get(employee_dest_file)
     time.sleep(8)
-    # read all contents and put it in other chrome driver.
+    # read all contents and put it in other page
     for each_class in ['name', 'emp_id', 'join_date', 'years_of_exp']:
-        source_elements = driver.find_elements_by_class_name(each_class)
-        dest_elements = driver_destin.find_elements_by_class_name(each_class)
+        source_elements = driver_source.find_elements_by_class_name(each_class)
+        dest_elements = driver_dest.find_elements_by_class_name(each_class)
         for each_element_source, each_element_dest in zip(source_elements, dest_elements):
             value = str(each_element_source.get_attribute('value'))
             if is_valid_data(each_class, value):
@@ -82,7 +80,6 @@ if __name__ == "__main__":
             else:
                 print("Invalid data for column name:%s ,with value:%s" % (each_class, value))
     time.sleep(5)
-    print("Copied all the data from one web page to another.")
-    # quit the driver if required.
-    driver_destin.quit()
-    driver.quit()
+    print("Copied all the data from one web page to other!")
+    driver_dest.quit()
+    driver_source.quit()

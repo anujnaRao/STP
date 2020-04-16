@@ -1,30 +1,30 @@
-import time
 from collections import OrderedDict
-
-import xlrd
-from selenium import webdriver
 from xlutils.copy import copy
+from selenium import webdriver
+import xlrd
+import time
 
-excel_file_name = "marks.xls"
-student_marks_html_page = "https://gnsaddy.github.io/webAutomationSelenium/seleniumTest/student.html"
+# excel_fname = "../marksfortesting.xls"
+excel_fname = "../LabProgramsMaterials/marks.xls"
+student_page = "file:///G:/workspace/MCA/4th_SEMESTER/STP/workshop/LabProgramsMaterials/student.html "
 
 
 def read_from_excel(path):
     book = xlrd.open_workbook(path)
-    first_sheet = book.sheet_by_index(0)  # read the first sheet
-    marks_dictionary = OrderedDict()
-    for each_name, index in zip(first_sheet.col_values(0, 1), range(1, first_sheet.row_len(0))):
-        each_rows = first_sheet.row_values(index, 1)
-        marks_dictionary[str(each_name)] = each_rows
-    return marks_dictionary
+    # Select First sheet of workbook
+    firstSheet = book.sheet_by_index(0)
+    mdict = OrderedDict()
+    for each_name, index in zip(firstSheet.col_values(0, 1), range(1, firstSheet.row_len(0))):
+        eachrow = firstSheet.row_values(index, 1)
+        mdict[str(each_name)] = eachrow
+    return mdict
 
 
-def calculate_result(driver, marks_dictionary):
-    # Send dictionary keys and values to browser inputs.
+def calculate_result(driver, mdict):
     number_of_subjects = 5
     student_name_objects = driver.find_elements_by_xpath("//*[@id='student_name']")
     marks_objects = driver.find_elements_by_class_name("marks")
-    for (each_item_key, values), index in zip(marks_dictionary.items(), range(0, number_of_subjects)):
+    for (each_item_key, values), index in zip(mdict.items(), range(0, number_of_subjects)):
         student_name_objects[index].send_keys(each_item_key)
         for each_marks, index_value in zip(values, range(0, len(values))):
             marks_objects[0].send_keys(str(each_marks))
@@ -48,56 +48,50 @@ def get_total_percentage_result(driver):
         percent.append(str(each_percentage_obj.get_attribute('value')))
     for each_result_obj in result_objects:
         result.append(str(each_result_obj.get_attribute('value')))
-    print("total:" + str(total))
+    print("Total:" + str(total))
     print("Percentage:" + str(percent))
     print("Result:" + str(result))
     return total, percent, result
 
 
 def append_to_excel(calculated_results):
-    """
-    Appends total, percentage, result to excel sheet.
-    """
+    # Appends total, percentage, result to new excel sheet called marks.
     number_of_subjects = 5
     total, percent, result = calculated_results
-    rb = xlrd.open_workbook("results.xls")
+    rb = xlrd.open_workbook("marks.xls")
     r_sheet = rb.sheet_by_index(0)
-    c = r_sheet.ncols  # number of columns
+    c = r_sheet.ncols  # total number of columns
     wb = copy(rb)
     sheet = wb.get_sheet(0)
-    sheet.write(0, c, "Total")  # Add the column 'Total' at the end in excel sheet
+    sheet.write(0, c, "Total")  # Append the column 'Total' at the end in excel sheet
     for each_total_value, index in zip(total, range(1, number_of_subjects + 1)):
         sheet.write(index, c, each_total_value)
-    sheet.write(0, c + 1, "Percentage")  # Add the column 'Percentage' at the end in excel sheet
+    sheet.write(0, c + 1, "Percentage")  # Append the column 'Percentage' at the end in excel sheet
     for each_percent_value, index in zip(percent, range(1, number_of_subjects + 1)):
         sheet.write(index, c + 1, each_percent_value)
-    sheet.write(0, c + 2, "Result")  # Add the column 'Result' at the end in excel sheet
+    sheet.write(0, c + 2, "Result")  # Append the column 'Result' at the end in excel sheet
     for each_result_value, index in zip(result, range(1, number_of_subjects + 1)):
         sheet.write(index, c + 2, each_result_value)
-    wb.save("results.xls")
-    print('Saved excel sheet successfully.')
+    wb.save(excel_fname)
+    print('Excel sheet was saved successfully!')
 
 
 if __name__ == '__main__':
-    # open chrome driver
-    # calculate the results through selenium
-    # read calculated results through selenium
-    # Append the result in excel sheet
-    # driver.quit()
-    marks_dictionary = read_from_excel(excel_file_name)
-    print(marks_dictionary)
+    '''Read excel sheet,show it on page, calculate the results,read calculated results through selenium and append 
+    the result in excel sheet '''
+    mdict = read_from_excel(excel_fname)
+    print(mdict)
 
-driver = webdriver.Chrome("../Drivers/x32/chromedriver.exe")
-# driver.maximize_window()
+driver = webdriver.Chrome("../drivers/x32/chromedriver.exe")
 
-path = student_marks_html_page
-driver.get(path)  # load web page
+path = student_page
+driver.get(path)
 time.sleep(4)
-
-calculate_result(driver, marks_dictionary)
+driver.maximize_window()
+calculate_result(driver, mdict)
 
 calculation_results = get_total_percentage_result(driver)
 
 append_to_excel(calculation_results)
-print("Closing the browser")
+print("Browser is closed!")
 driver.quit()
