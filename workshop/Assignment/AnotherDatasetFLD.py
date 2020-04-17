@@ -6,12 +6,13 @@ style.use('fivethirtyeight')
 np.random.seed(seed=42)
 
 # Create data
-classA = np.array([[1, 1, 1, 2, 2, 2, 2, 2.5, 3.5, 3.5],
-                   [1, 2, 3, 1, 2, 3, 3.5, 2, 1, 2]])
-classB = np.array([[3.5, 3.5, 4.5, 4.5, 4.5, 5, 5, 6, 6, 6], [3, 4, 1, 2, 3, 4, 5, 3, 4, 5]])
+classA = np.array([[1, 1.5, 1.7, 1.45, 1.1, 1.6, 1.8],
+                   [1.8, 1.55, 1.45, 1.6, 1.65, 1.7, 1.75]])
+classB = np.array([[0.1, 0.5, 0.25, 0.4, 0.3, 0.6, 0.35, 0.15, 0.4, 0.5, 0.48],
+                   [1.1, 1.5, 1.3, 1.2, 1.15, 1.0, 1.4, 1.2, 1.3, 1.5, 1.0]])
 
 # Plot the data
-fig = plt.figure(figsize=(10, 10))
+fig = plt.figure(figsize=(5, 5))
 ax0 = fig.add_subplot(111)
 ax0.scatter(classA[0], classA[1], marker='^', c='yellow', edgecolor='black')
 ax0.scatter(classB[0], classB[1], marker='o', c='blue', edgecolor='black')
@@ -65,22 +66,22 @@ print("Class B vector")
 print(y2)
 
 # Plot the data and the graph
-fig = plt.figure(figsize=(10, 10))
+fig = plt.figure(figsize=(5, 5))
 ax0 = fig.add_subplot(111)
 ax0.scatter(classA[0], classA[1], marker='^', c='yellow', edgecolor='black')
 ax0.scatter(classB[0], classB[1], marker='o', c='blue', edgecolor='black')
-ax0.set_xlim(-1, 10)
-ax0.set_ylim(-1, 10)
+ax0.set_xlim(-1, 5)
+ax0.set_ylim(-1, 5)
 
 list1, list2 = [], []
-for i in range(10):
+for i in range(len(y1)):
     list1.append(y1[i][0])
     list2.append(y1[i][1])
 
 plt.plot(list1, list2)
 
 list1, list2 = [], []
-for j in range(10):
+for j in range(len(y2)):
     list1.append(y2[j][0])
     list2.append(y2[j][1])
 plt.plot(list1, list2), plt.xlabel('Range'), plt.ylabel('Range'), plt.title("Fisher's LD")
