@@ -45,9 +45,9 @@ print("Scatter Within")
 print(SW)
 
 # Calculate the scatter matrices for the SB (Scatter between) and sum the elements up
-scatter_classA = np.dot(10 * (classA - mean_classA), (classA - mean_classA).T)
-scatter_classB = np.dot(10 * (classB - mean_classB), (classB - mean_classB).T)
-scatter_classC = np.dot(10 * (classC - mean_classC), (classC - mean_classC).T)
+scatter_classA = np.dot(7 * (classA - mean_classA), (classA - mean_classA).T)
+scatter_classB = np.dot(11 * (classB - mean_classB), (classB - mean_classB).T)
+scatter_classC = np.dot(22 * (classC - mean_classC), (classC - mean_classC).T)
 
 # Calculate the SB by adding the scatters between classes
 SB = scatter_classA + scatter_classB + scatter_classC
