@@ -18,7 +18,6 @@ def wait_for_user_input(driver):
         else:
             time.sleep(1)
 
-
 li = []
 
 
@@ -68,7 +67,14 @@ if __name__ == "__main__":
     driver_source.maximize_window()
     driver_source.get(employee_source_file)  # load web page.
     print("Chrome driver opened.")
+    time.sleep(2)
     wait_for_user_input(driver_source)
+    time.sleep(2)
+    timer = time.strftime("%Y%m%d = %H%M%S")
+    picture = "webImages"
+    driver_source.save_screenshot("../ScreenPrint/" + picture + timer + ".png")
+    time.sleep(2)
+
     # open 2nd chrome driver to open one more website
     driver_destin = webdriver.Chrome("../Drivers/x32/chromedriver.exe")
     driver_destin.maximize_window()
@@ -84,7 +90,12 @@ if __name__ == "__main__":
                 each_element_dest.send_keys(value)
             else:
                 print("Invalid data for column name:%s ,with value:%s" % (each_class, value))
+
     time.sleep(3)
+    timer = time.strftime("%Y%m%d = %H%M%S")
+    picture = "webImages"
+    driver_source.save_screenshot("../ScreenPrint/" + picture + timer + ".png")
+    time.sleep(2)
     print("Copied all the data from one web page to another.")
     # quit the driver if required.
     driver_destin.quit()

@@ -34,6 +34,11 @@ def calculate_result(driver, marks_dictionary):
             marks_objects[0].send_keys(str(each_marks))
             del marks_objects[0]
     time.sleep(3)
+    timer = time.strftime("%Y%m%d = %H%M%S")
+    picture = "webImages"
+    driver.save_screenshot("../ScreenPrint/" + picture + timer + ".png")
+    time.sleep(2)
+
     driver.find_element_by_id("calculate").click()
     print("Clicked on calculate!")
 
@@ -81,6 +86,11 @@ Appends total, percentage, result to excel sheet.
     for each_result_value, index in zip(result, range(1, number_of_subjects + 1)):
         sheet.write(index, c + 2, each_result_value)
     wb.save("../LabProgramsMaterials/results.xls")
+    time.sleep(2)
+    timer = time.strftime("%Y%m%d = %H%M%S")
+    picture = "webImages"
+    driver.save_screenshot("../ScreenPrint/" + picture + timer + ".png")
+    time.sleep(2)
     print('Saved excel sheet successfully.')
 
 
@@ -97,8 +107,15 @@ driver = webdriver.Chrome("../Drivers/x32/chromedriver.exe")
 driver.maximize_window()
 path = student_marks_html_page
 driver.get(path)  # load web page.
-time.sleep(4)
+
+time.sleep(2)
+timer = time.strftime("%Y%m%d = %H%M%S")
+picture = "webImages"
+driver.save_screenshot("../ScreenPrint/" + picture + timer + ".png")
+time.sleep(2)
+
 calculate_result(driver, marks_dictionary)
+
 calculation_results = get_total_percentage_result(driver)
 append_to_excel(calculation_results)
 print("Closing the browser")
